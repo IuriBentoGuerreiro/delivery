@@ -7,6 +7,8 @@ import com.iuri.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,5 +17,10 @@ public class UserService {
 
     public UserResponse save(UserRequest userRequest){
         return UserResponse.convert(userRepository.save(User.convert(userRequest)));
+    }
+
+    public List<UserResponse> findAll(){
+        return userRepository.findAll().stream()
+                .map(UserResponse::convert).toList();
     }
 }
