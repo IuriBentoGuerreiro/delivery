@@ -1,5 +1,6 @@
 package com.iuri.delivery.model;
 
+import com.iuri.delivery.dto.user.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +22,12 @@ public class User {
     private String email;
     @Column(name = "address")
     private String address;
+
+    public static User convert(UserRequest userRequest) {
+        return User.builder()
+                .name(userRequest.getName())
+                .email(userRequest.getEmail())
+                .address(userRequest.getAddress())
+                .build();
+    }
 }
