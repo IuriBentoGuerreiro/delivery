@@ -41,8 +41,8 @@ public class Delivery {
 
     public static DeliveryResponse convert(DeliveryRequest deliveryRequest) {
         return DeliveryResponse.builder()
-                .sale(deliveryRequest.getSale())
-                .deliveryPerson(deliveryRequest.getDeliveryPerson())
+                .sale(new Sale(deliveryRequest.getSaleId()))
+                .deliveryPerson(new User(deliveryRequest.getDeliveryPersonId()))
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
                 .departureTime(deliveryRequest.getDepartureTime())
                 .deliveryTime(deliveryRequest.getDeliveryTime())

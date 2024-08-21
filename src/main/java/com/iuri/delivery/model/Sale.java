@@ -34,6 +34,10 @@ public class Sale {
     @Column(name = "delivery_address")
     private String deliveryAddress;
 
+    public Sale(Integer id){
+        this.id = id;
+    }
+
     public static Sale convert(SaleRequest saleRequest) {
         return Sale.builder()
                 .products(saleRequest.getProducts().stream()

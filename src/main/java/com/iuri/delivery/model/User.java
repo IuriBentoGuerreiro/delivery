@@ -23,6 +23,10 @@ public class User {
     @Column(name = "address")
     private String address;
 
+    public User(Integer id){
+        this.id = id;
+    }
+
     public static User convert(UserRequest userRequest) {
         return User.builder()
                 .name(userRequest.getName())
