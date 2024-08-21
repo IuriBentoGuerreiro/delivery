@@ -7,6 +7,8 @@ import com.iuri.delivery.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -15,5 +17,10 @@ public class ProductService {
 
     public ProductResponse save(ProductRequest productRequest){
         return ProductResponse.convert(productRepository.save(Product.convert(productRequest)));
+    }
+
+    public List<ProductResponse> findAll(){
+        return productRepository.findAll().stream()
+                .map(ProductResponse::convert).toList();
     }
 }
