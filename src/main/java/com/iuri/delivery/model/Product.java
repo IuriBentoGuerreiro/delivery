@@ -1,5 +1,6 @@
 package com.iuri.delivery.model;
 
+import com.iuri.delivery.dto.product.ProductRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +35,14 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "sale_id")
     private Sale sale;
+
+    public static Product convert(ProductRequest productRequest) {
+        return Product.builder()
+                .name(productRequest.getName())
+                .description(productRequest.getDescription())
+                .price(productRequest.getPrice())
+                .stockQuantity(productRequest.getStockQuantity())
+                .imageUrl(productRequest.getImageUrl())
+                .build();
+    }
 }
