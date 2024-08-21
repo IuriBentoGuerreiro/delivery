@@ -1,5 +1,7 @@
 package com.iuri.delivery.model;
 
+import com.iuri.delivery.dto.delivery.DeliveryRequest;
+import com.iuri.delivery.dto.delivery.DeliveryResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +39,14 @@ public class Delivery {
     @Column(name = "current_location")
     private String currentLocation;
 
+    public static DeliveryResponse convert(DeliveryRequest deliveryRequest) {
+        return DeliveryResponse.builder()
+                .sale(deliveryRequest.getSale())
+                .deliveryPerson(deliveryRequest.getDeliveryPerson())
+                .deliveryStatus(deliveryRequest.getDeliveryStatus())
+                .departureTime(deliveryRequest.getDepartureTime())
+                .deliveryTime(deliveryRequest.getDeliveryTime())
+                .currentLocation(deliveryRequest.getCurrentLocation())
+                .build();
+    }
 }
