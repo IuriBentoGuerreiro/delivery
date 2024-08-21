@@ -36,6 +36,10 @@ public class Product {
     @JoinColumn(name = "sale_id")
     private Sale sale;
 
+    public Product(Integer id) {
+        this.id = id;
+    }
+
     public static Product convert(ProductRequest productRequest) {
         return Product.builder()
                 .name(productRequest.getName())

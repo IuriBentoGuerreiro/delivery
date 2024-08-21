@@ -1,5 +1,6 @@
 package com.iuri.delivery.model;
 
+import com.iuri.delivery.dto.sale.SaleRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,14 @@ public class Sale {
     private BigDecimal totalAmount;
     @Column(name = "delivery_address")
     private String deliveryAddress;
+
+    public static Sale convert(SaleRequest saleRequest) {
+        return Sale.builder()
+                .products(saleRequest.getProducts().stream()
+                        .map(Product::new).toList())
+                .saleDate(saleRequest.getSaleDate())
+                .totalAmount(saleRequest.getTotalAmount())
+                .deliveryAddress(saleRequest.getDeliveryAddress())
+                .build();
+    }
 }
