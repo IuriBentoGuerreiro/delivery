@@ -30,4 +30,8 @@ public class Product {
     private Integer stockQuantity;
     @Column(name = "image_url")
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 }
