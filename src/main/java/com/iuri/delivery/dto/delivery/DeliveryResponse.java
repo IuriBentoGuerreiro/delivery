@@ -23,6 +23,7 @@ public class DeliveryResponse {
     public static DeliveryResponse convert(Delivery delivery) {
         return DeliveryResponse.builder()
                 .id(delivery.getId())
+                .sale(delivery.getSale())
                 .deliveryPerson(delivery.getDeliveryPerson())
                 .deliveryStatus(delivery.getDeliveryStatus())
                 .departureTime(delivery.getDepartureTime())
