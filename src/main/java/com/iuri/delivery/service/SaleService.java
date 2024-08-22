@@ -6,6 +6,7 @@ import com.iuri.delivery.model.Sale;
 import com.iuri.delivery.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -22,5 +23,10 @@ public class SaleService {
     public List<SaleResponse> findAll(){
         return saleRepository.findAll().stream()
                 .map(SaleResponse::convert).toList();
+    }
+
+    public Sale findById(Integer id){
+        return saleRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("Not found"));
     }
 }
