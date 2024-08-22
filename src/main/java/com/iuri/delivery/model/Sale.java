@@ -24,7 +24,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "sale")
+    @ManyToMany
     private List<Product> products;
 
     @Column(name = "sale_date")
