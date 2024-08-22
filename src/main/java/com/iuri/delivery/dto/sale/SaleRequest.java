@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class SaleRequest {
 
-    private List<Integer> products;
+    private List<Integer> productId;
     private LocalDateTime saleDate;
     private BigDecimal totalAmount;
     private String deliveryAddress;

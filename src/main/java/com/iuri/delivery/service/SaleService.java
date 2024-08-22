@@ -26,7 +26,7 @@ public class SaleService {
 
     public SaleResponse save(SaleRequest saleRequest){
         var product = saleRepository.save(Sale.builder()
-                        .products(productService.findAllById(saleRequest.getProducts()))
+                        .products(productService.findAllById(saleRequest.getProductId()))
                         .deliveryAddress(saleRequest.getDeliveryAddress())
                         .totalAmount(saleRequest.getTotalAmount())
                         .saleDate(LocalDateTime.now())

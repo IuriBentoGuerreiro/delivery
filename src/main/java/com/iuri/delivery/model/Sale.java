@@ -40,7 +40,7 @@ public class Sale {
 
     public static Sale convert(SaleRequest saleRequest) {
         return Sale.builder()
-                .products(saleRequest.getProducts().stream()
+                .products(saleRequest.getProductId().stream()
                         .map(Product::new).toList())
                 .saleDate(saleRequest.getSaleDate())
                 .totalAmount(saleRequest.getTotalAmount())
