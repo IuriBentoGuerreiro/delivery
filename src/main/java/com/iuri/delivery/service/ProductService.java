@@ -23,4 +23,8 @@ public class ProductService {
         return productRepository.findAll().stream()
                 .map(ProductResponse::convert).toList();
     }
+
+    public List<Product> findAllById(List<Integer> ids){
+        return productRepository.findAllById(ids);
+    }
 }
