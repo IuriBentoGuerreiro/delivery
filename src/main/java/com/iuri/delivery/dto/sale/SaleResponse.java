@@ -1,6 +1,6 @@
 package com.iuri.delivery.dto.sale;
 
-import com.iuri.delivery.model.Product;
+import com.iuri.delivery.dto.product.ProductResponse;
 import com.iuri.delivery.model.Sale;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SaleResponse {
 
     private Integer id;
-    private List<Product> products;
+    private List<ProductResponse> products;
     private LocalDateTime saleDate;
     private BigDecimal totalAmount;
     private String deliveryAddress;
@@ -22,7 +22,8 @@ public class SaleResponse {
     public static SaleResponse convert(Sale sale) {
         return SaleResponse.builder()
                 .id(sale.getId())
-                .products(sale.getProducts())
+                .products(sale.getProducts().stream()
+                        .map(ProductResponse::convert).toList())
                 .saleDate(sale.getSaleDate())
                 .totalAmount(sale.getTotalAmount())
                 .deliveryAddress(sale.getDeliveryAddress())
