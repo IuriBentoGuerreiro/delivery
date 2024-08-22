@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DeliveryService {
@@ -34,5 +35,10 @@ public class DeliveryService {
                 .build());
 
         return DeliveryResponse.convert(delivery);
+    }
+
+    public List<DeliveryResponse> findAll(){
+        return deliveryRepository.findAll().stream()
+                .map(DeliveryResponse::convert).toList();
     }
 }
