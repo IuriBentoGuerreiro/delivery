@@ -3,6 +3,7 @@ package com.iuri.delivery.controller;
 import com.iuri.delivery.dto.delivery.DeliveryRequest;
 import com.iuri.delivery.dto.delivery.DeliveryResponse;
 import com.iuri.delivery.service.DeliveryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class DeliveryController {
     private DeliveryService deliveryService;
 
     @PostMapping
-    public DeliveryResponse save(@RequestBody DeliveryRequest deliveryRequest){
+    public DeliveryResponse save(@Valid @RequestBody DeliveryRequest deliveryRequest){
         return deliveryService.save(deliveryRequest);
     }
 

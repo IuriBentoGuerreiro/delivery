@@ -3,6 +3,7 @@ package com.iuri.delivery.controller;
 import com.iuri.delivery.dto.user.UserRequest;
 import com.iuri.delivery.dto.user.UserResponse;
 import com.iuri.delivery.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public UserResponse save(@RequestBody UserRequest userRequest){
+    public UserResponse save(@Valid @RequestBody UserRequest userRequest){
         return userService.save(userRequest);
     }
 
