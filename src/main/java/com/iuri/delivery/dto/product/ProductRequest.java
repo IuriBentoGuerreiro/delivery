@@ -28,7 +28,5 @@ public class ProductRequest {
     @Min(value = 0)
     private Integer stockQuantity;
 
-    @NotBlank
-    @Size(max = 255)
     private String imageUrl;
 }
