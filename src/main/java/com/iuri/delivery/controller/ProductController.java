@@ -5,6 +5,7 @@ import com.iuri.delivery.dto.product.ProductResponse;
 import com.iuri.delivery.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +18,13 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse save(@Valid @RequestBody ProductRequest productRequest){
         return productService.save(productRequest);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> findAll(){
         return productService.findAll();
     }
