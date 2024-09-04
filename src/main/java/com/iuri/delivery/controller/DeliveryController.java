@@ -33,4 +33,25 @@ public class DeliveryController {
     public List<DeliveryResponse> findAll(){
         return deliveryService.findAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "findById")
+    public DeliveryResponse findById(@PathVariable Integer id){
+        return DeliveryResponse.convert(deliveryService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update")
+    public DeliveryResponse update(@RequestBody DeliveryRequest deliveryRequest, @PathVariable Integer id){
+        return DeliveryResponse.convert(deliveryService.update(deliveryRequest, id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete")
+    public void delete(@PathVariable Integer id){
+        deliveryService.delete(id);
+    }
 }
