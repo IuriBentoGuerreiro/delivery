@@ -4,6 +4,7 @@ import com.iuri.delivery.dto.user.UserRequest;
 import com.iuri.delivery.dto.user.UserResponse;
 import com.iuri.delivery.model.User;
 import com.iuri.delivery.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -28,5 +29,16 @@ public class UserService {
     public User findById(Integer id){
         return userRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException("Not found"));
+    }
+
+    public User update(UserRequest userRequest, Integer id){
+        var user = findById(id);
+        BeanUtils.copyProperties(userRequest, user, "id");
+        return userRepository.save(user);
+    }
+
+    public void delete(Integer id){
+        var user = findById(id);
+        userRepository.delete(user);
     }
 }

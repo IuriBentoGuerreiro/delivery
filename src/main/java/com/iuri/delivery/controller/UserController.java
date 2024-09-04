@@ -33,4 +33,25 @@ public class UserController {
     public List<UserResponse> findAll(){
         return userService.findAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "findById")
+    public UserResponse findById(@PathVariable Integer id){
+        return UserResponse.convert(userService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update")
+    public UserResponse update(@RequestBody UserRequest userRequest, @PathVariable Integer id){
+        return UserResponse.convert(userService.update(userRequest, id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete")
+    public void delete(@PathVariable Integer id){
+        userService.delete(id);
+    }
 }
