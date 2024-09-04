@@ -1,10 +1,10 @@
 package com.iuri.delivery.service;
 
-import com.iuri.delivery.dto.product.ProductResponse;
 import com.iuri.delivery.dto.sale.SaleRequest;
 import com.iuri.delivery.dto.sale.SaleResponse;
 import com.iuri.delivery.model.Sale;
 import com.iuri.delivery.repository.SaleRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -43,5 +43,16 @@ public class SaleService {
     public Sale findById(Integer id){
         return saleRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException("Not found"));
+    }
+
+    public Sale update(SaleRequest saleRequest, Integer id){
+        var sale = findById(id);
+        BeanUtils.copyProperties(saleRequest, sale, "id");
+        return saleRepository.save(sale);
+    }
+
+    public void delete(Integer id){
+        var sale = findById(id);
+        saleRepository.delete(sale);
     }
 }

@@ -33,4 +33,18 @@ public class SaleController {
     public List<SaleResponse> findAll(){
         return saleService.findAll();
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update")
+    public SaleResponse update(@RequestBody SaleRequest saleRequest, @PathVariable Integer id){
+        return SaleResponse.convert(saleService.update(saleRequest, id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete")
+    public void delete(@PathVariable Integer id){
+        saleService.delete(id);
+    }
 }
