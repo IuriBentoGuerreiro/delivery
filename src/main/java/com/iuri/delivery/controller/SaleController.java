@@ -2,6 +2,7 @@ package com.iuri.delivery.controller;
 
 import com.iuri.delivery.dto.sale.SaleRequest;
 import com.iuri.delivery.dto.sale.SaleResponse;
+import com.iuri.delivery.dto.user.UserResponse;
 import com.iuri.delivery.service.SaleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +33,13 @@ public class SaleController {
     @Operation(summary = "findAll")
     public List<SaleResponse> findAll(){
         return saleService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "findById")
+    public SaleResponse findById(@PathVariable Integer id){
+        return SaleResponse.convert(saleService.findById(id));
     }
 
     @PutMapping("/{id}")
