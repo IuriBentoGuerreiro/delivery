@@ -33,4 +33,25 @@ public class ProductController {
     public List<ProductResponse> findAll(){
         return productService.findAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "findById")
+    public ProductResponse findById(@PathVariable Integer id){
+        return ProductResponse.convert(productService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "update")
+    public ProductResponse update(@RequestBody ProductRequest productRequest, @PathVariable Integer id){
+        return ProductResponse.convert(productService.update(productRequest, id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "delete")
+    public void delete(@PathVariable Integer id){
+        productService.delete(id);
+    }
 }
