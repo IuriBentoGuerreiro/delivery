@@ -39,8 +39,8 @@ public class Delivery {
     @Column(name = "current_location")
     private String currentLocation;
 
-    public static DeliveryResponse convert(DeliveryRequest deliveryRequest) {
-        return DeliveryResponse.builder()
+    public static Delivery convert(DeliveryRequest deliveryRequest) {
+        return Delivery.builder()
                 .sale(new Sale(deliveryRequest.getSaleId()))
                 .deliveryPerson(new User(deliveryRequest.getDeliveryPersonId()))
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
