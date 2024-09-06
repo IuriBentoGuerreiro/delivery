@@ -1,7 +1,6 @@
 package com.iuri.delivery.model;
 
 import com.iuri.delivery.dto.delivery.DeliveryRequest;
-import com.iuri.delivery.dto.delivery.DeliveryResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "delivery")
@@ -22,9 +22,8 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
+    @OneToMany
+    private List <Sale> sales;
 
     @ManyToOne
     @JoinColumn(name = "delivery_person_id")
@@ -39,9 +38,9 @@ public class Delivery {
     @Column(name = "current_location")
     private String currentLocation;
 
-    public static DeliveryResponse convert(DeliveryRequest deliveryRequest) {
-        return DeliveryResponse.builder()
-                .sale(new Sale(deliveryRequest.getSaleId()))
+    public static Delivery convert(DeliveryRequest deliveryRequest) {
+        return Delivery.builder()
+                .sales(deliveryRequest.getSaleRequests().stream().map(Sale::convert).toList())
                 .deliveryPerson(new User(deliveryRequest.getDeliveryPersonId()))
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
                 .departureTime(deliveryRequest.getDepartureTime())

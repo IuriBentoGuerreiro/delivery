@@ -7,13 +7,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 public class DeliveryResponse {
 
     private Integer id;
-    private Sale sale;
+    private List <Sale> sale;
     private User deliveryPerson;
     private String deliveryStatus;
     private LocalDateTime departureTime;
@@ -23,7 +24,7 @@ public class DeliveryResponse {
     public static DeliveryResponse convert(Delivery delivery) {
         return DeliveryResponse.builder()
                 .id(delivery.getId())
-                .sale(delivery.getSale())
+                .sale(delivery.getSales())
                 .deliveryPerson(delivery.getDeliveryPerson())
                 .deliveryStatus(delivery.getDeliveryStatus())
                 .departureTime(delivery.getDepartureTime())

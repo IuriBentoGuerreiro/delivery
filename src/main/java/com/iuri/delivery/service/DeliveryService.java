@@ -3,6 +3,7 @@ package com.iuri.delivery.service;
 import com.iuri.delivery.dto.delivery.DeliveryRequest;
 import com.iuri.delivery.dto.delivery.DeliveryResponse;
 import com.iuri.delivery.model.Delivery;
+import com.iuri.delivery.model.Sale;
 import com.iuri.delivery.repository.DeliveryRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class DeliveryService {
         this.userService = userService;
     }
 
-    public DeliveryResponse save(DeliveryRequest deliveryRequest){
+    public DeliveryResponse save(DeliveryRequest deliveryRequest) {
         var delivery = deliveryRepository.save(Delivery.builder()
-                .sale(saleService.findById(deliveryRequest.getSaleId()))
+                .sales(saleService.saveAll(deliveryRequest.getSaleRequests().stream().map(Sale::convert).toList()))
                 .deliveryPerson(userService.findById(deliveryRequest.getDeliveryPersonId()))
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
                 .deliveryTime(LocalDateTime.now())
@@ -39,23 +40,23 @@ public class DeliveryService {
         return DeliveryResponse.convert(delivery);
     }
 
-    public List<DeliveryResponse> findAll(){
+    public List<DeliveryResponse> findAll() {
         return deliveryRepository.findAll().stream()
                 .map(DeliveryResponse::convert).toList();
     }
 
-    public Delivery findById(Integer id){
+    public Delivery findById(Integer id) {
         return deliveryRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Not found"));
     }
 
-    public Delivery update(DeliveryRequest deliveryRequest, Integer id){
+    public Delivery update(DeliveryRequest deliveryRequest, Integer id) {
         var delivery = findById(id);
         BeanUtils.copyProperties(deliveryRequest, delivery, "id");
         return deliveryRepository.save(delivery);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         var delivery = findById(id);
         deliveryRepository.delete(delivery);
     }
