@@ -1,8 +1,11 @@
 package com.iuri.delivery.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.iuri.delivery.dto.user.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -22,6 +25,9 @@ public class User {
     private String email;
     @Column(name = "address")
     private String address;
+    @JsonBackReference
+    @OneToMany(mappedBy = "user")
+    private List<DeliveryRating> deliveryRatings;
 
     public User(Integer id){
         this.id = id;
