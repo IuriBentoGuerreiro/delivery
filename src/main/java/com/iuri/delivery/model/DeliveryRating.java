@@ -1,5 +1,6 @@
 package com.iuri.delivery.model;
 
+import com.iuri.delivery.dto.deliveryRating.DeliveryRatingRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -40,4 +41,13 @@ public class DeliveryRating {
     @JoinColumn(name = "sale_id")
     @NotNull
     private Sale sale;
+
+    public static DeliveryRating convert(DeliveryRatingRequest deliveryRatingRequest){
+        return DeliveryRating.builder()
+                .comment(deliveryRatingRequest.getComment())
+                .rating(deliveryRatingRequest.getRating())
+                .user(new User(deliveryRatingRequest.getUserId()))
+                .sale(new Sale(deliveryRatingRequest.getSaleId()))
+                .build();
+    }
 }
