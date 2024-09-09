@@ -2,9 +2,7 @@ package com.iuri.delivery.model;
 
 import com.iuri.delivery.dto.deliveryRating.DeliveryRatingRequest;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +26,8 @@ public class DeliveryRating {
     private String comment;
 
     @Column(name = "rating")
-    @Size(min = 1, max = 5)
+    @Max(5)
+    @Min(1)
     @NotNull
     private Integer rating;
 
