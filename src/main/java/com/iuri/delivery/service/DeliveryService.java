@@ -18,18 +18,23 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
     private final SaleService saleService;
     private final UserService userService;
+    private final EmailService emailService;
 
     @Autowired
-    public DeliveryService(DeliveryRepository deliveryRepository, SaleService saleService, UserService userService) {
+    public DeliveryService(DeliveryRepository deliveryRepository, SaleService saleService, UserService userService, EmailService emailService) {
         this.deliveryRepository = deliveryRepository;
         this.saleService = saleService;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     public DeliveryResponse save(DeliveryRequest deliveryRequest){
+        var user = userService.findById(deliveryRequest.getDeliveryPersonId());
+
+        emailService.sendEmail(user.getEmail(), "PEDIDO ENVIADO!!!", "Seu pedido foi enviado com sucesso!");
         var delivery = deliveryRepository.save(Delivery.builder()
                 .sale(saleService.findById(deliveryRequest.getSaleId()))
-                .deliveryPerson(userService.findById(deliveryRequest.getDeliveryPersonId()))
+                .deliveryPerson(user)
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
                 .deliveryTime(LocalDateTime.now())
                 .departureTime(deliveryRequest.getDepartureTime())
