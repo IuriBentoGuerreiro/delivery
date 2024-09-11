@@ -1,5 +1,6 @@
 package com.iuri.delivery.dto.deliveryRating;
 
+import com.iuri.delivery.model.DeliveryPerson;
 import com.iuri.delivery.model.DeliveryRating;
 import com.iuri.delivery.model.Sale;
 import com.iuri.delivery.model.User;
@@ -13,7 +14,7 @@ public class DeliveryRatingResponse {
     private Integer id;
     private String comment;
     private Integer rating;
-    private User user;
+    private DeliveryPerson deliveryPerson;
     private Sale sale;
 
     public static DeliveryRatingResponse convert(DeliveryRating deliveryRating){
@@ -21,8 +22,8 @@ public class DeliveryRatingResponse {
                 .id(deliveryRating.getId())
                 .comment(deliveryRating.getComment())
                 .rating(deliveryRating.getRating())
-                .user(deliveryRating.getUser())
                 .sale(deliveryRating.getSale())
+                .deliveryPerson(deliveryRating.getDeliveryPerson())
                 .build();
     }
 }

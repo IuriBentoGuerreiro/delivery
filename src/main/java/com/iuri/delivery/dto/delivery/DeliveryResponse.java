@@ -1,8 +1,6 @@
 package com.iuri.delivery.dto.delivery;
 
-import com.iuri.delivery.model.Delivery;
-import com.iuri.delivery.model.Sale;
-import com.iuri.delivery.model.User;
+import com.iuri.delivery.model.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,7 +12,8 @@ public class DeliveryResponse {
 
     private Integer id;
     private Sale sale;
-    private User deliveryPerson;
+    private Client client;
+    private DeliveryPerson deliveryPerson;
     private String deliveryStatus;
     private LocalDateTime departureTime;
     private LocalDateTime deliveryTime;
@@ -29,6 +28,7 @@ public class DeliveryResponse {
                 .departureTime(delivery.getDepartureTime())
                 .deliveryTime(delivery.getDeliveryTime())
                 .currentLocation(delivery.getCurrentLocation())
+                .client(delivery.getClient())
                 .build();
     }
 }

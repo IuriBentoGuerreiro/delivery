@@ -34,7 +34,7 @@ public class DeliveryRating {
     @ManyToOne
     @JoinColumn(name = "delivery_person_id")
     @NotNull
-    private User user;
+    private DeliveryPerson deliveryPerson;
 
     @ManyToOne
     @JoinColumn(name = "sale_id")
@@ -45,7 +45,7 @@ public class DeliveryRating {
         return DeliveryRating.builder()
                 .comment(deliveryRatingRequest.getComment())
                 .rating(deliveryRatingRequest.getRating())
-                .user(new User(deliveryRatingRequest.getUserId()))
+                .deliveryPerson(new DeliveryPerson(deliveryRatingRequest.getUserId()))
                 .sale(new Sale(deliveryRatingRequest.getSaleId()))
                 .build();
     }

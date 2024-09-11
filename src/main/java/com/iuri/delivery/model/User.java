@@ -1,18 +1,19 @@
 package com.iuri.delivery.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.iuri.delivery.dto.user.UserRequest;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
@@ -25,9 +26,6 @@ public class User {
     private String email;
     @Column(name = "address")
     private String address;
-    @JsonBackReference
-    @OneToMany(mappedBy = "user")
-    private List<DeliveryRating> deliveryRatings;
 
     public User(Integer id){
         this.id = id;

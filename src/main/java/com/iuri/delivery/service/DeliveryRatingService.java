@@ -28,7 +28,6 @@ public class DeliveryRatingService {
                         .rating(request.getRating())
                         .comment(request.getComment())
                         .sale(saleService.findById(request.getSaleId()))
-                        .user(userService.findById(request.getUserId()))
                 .build());
 
         return DeliveryRatingResponse.convert(deliveryRating);

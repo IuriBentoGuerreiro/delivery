@@ -1,7 +1,6 @@
 package com.iuri.delivery.model;
 
 import com.iuri.delivery.dto.delivery.DeliveryRequest;
-import com.iuri.delivery.dto.delivery.DeliveryResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +27,10 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name = "delivery_person_id")
-    private User deliveryPerson;
+    private DeliveryPerson deliveryPerson;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     @Column(name = "delivery_status")
     private String deliveryStatus;
@@ -42,11 +44,12 @@ public class Delivery {
     public static Delivery convert(DeliveryRequest deliveryRequest) {
         return Delivery.builder()
                 .sale(new Sale(deliveryRequest.getSaleId()))
-                .deliveryPerson(new User(deliveryRequest.getDeliveryPersonId()))
+                .deliveryPerson(new DeliveryPerson(deliveryRequest.getDeliveryPersonId()))
                 .deliveryStatus(deliveryRequest.getDeliveryStatus())
                 .departureTime(deliveryRequest.getDepartureTime())
                 .deliveryTime(deliveryRequest.getDeliveryTime())
                 .currentLocation(deliveryRequest.getCurrentLocation())
+                .client(new Client(deliveryRequest.getClient()))
                 .build();
     }
 }
