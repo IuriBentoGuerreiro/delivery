@@ -3,9 +3,9 @@ package com.iuri.delivery.controller;
 import com.iuri.delivery.dto.deliveryPerson.DeliveryPersonDTO;
 import com.iuri.delivery.model.DeliveryPerson;
 import com.iuri.delivery.service.DeliveryPersonService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
