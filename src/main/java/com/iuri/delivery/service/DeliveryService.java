@@ -34,9 +34,9 @@ public class DeliveryService {
     }
 
     public DeliveryResponse save(DeliveryRequest deliveryRequest){
-        var user = userService.findById(deliveryRequest.getClient());
+        var client = userService.findById(deliveryRequest.getClient());
 
-        emailService.sendEmail(user.getEmail(), "PEDIDO ENVIADO!!!", "Seu pedido foi enviado com sucesso!");
+        emailService.sendEmail(client.getEmail(), "PEDIDO ENVIADO!!!", "Seu pedido foi enviado com sucesso!");
         var delivery = deliveryRepository.save(Delivery.builder()
                 .sale(saleService.findById(deliveryRequest.getSaleId()))
                 .deliveryPerson(deliveryPersonService.findById(deliveryRequest.getDeliveryPersonId()))
