@@ -1,5 +1,6 @@
 package com.iuri.delivery.controller;
 
+import com.iuri.delivery.dto.deliveryPerson.DeliveryPersonDTO;
 import com.iuri.delivery.model.DeliveryPerson;
 import com.iuri.delivery.service.DeliveryPersonService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -16,7 +17,7 @@ public class DeliveryPersonController {
     private DeliveryPersonService deliveryPersonService;
 
     @PostMapping
-    public DeliveryPerson save(@RequestBody DeliveryPerson deliveryPerson){
-        return deliveryPersonService.save(deliveryPerson);
+    public DeliveryPerson save(@RequestBody DeliveryPersonDTO deliveryPersonDTO){
+        return deliveryPersonService.save(deliveryPersonDTO);
     }
 }

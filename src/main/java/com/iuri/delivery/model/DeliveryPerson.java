@@ -3,14 +3,12 @@ package com.iuri.delivery.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Data
 public class DeliveryPerson extends User{
 
     @JsonBackReference

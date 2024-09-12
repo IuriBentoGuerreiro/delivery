@@ -1,4 +1,4 @@
-package com.iuri.delivery.dto;
+package com.iuri.delivery.dto.client;
 
 
 public record ClientDTO(String name,

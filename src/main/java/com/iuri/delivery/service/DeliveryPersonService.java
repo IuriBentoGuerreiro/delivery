@@ -1,7 +1,9 @@
 package com.iuri.delivery.service;
 
+import com.iuri.delivery.dto.deliveryPerson.DeliveryPersonDTO;
 import com.iuri.delivery.model.DeliveryPerson;
 import com.iuri.delivery.repository.DeliveryPersonRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -17,7 +19,9 @@ public class DeliveryPersonService {
                 ()-> new NotFoundException("Not found"));
     }
 
-    public DeliveryPerson save(DeliveryPerson deliveryPerson){
-        return deliveryPersonRepository.save(deliveryPerson);
+    public DeliveryPerson save(DeliveryPersonDTO deliveryPersonDTO){
+        var deliveyPerson = new DeliveryPerson();
+        BeanUtils.copyProperties(deliveryPersonDTO, deliveyPerson);
+        return deliveryPersonRepository.save(deliveyPerson);
     }
 }

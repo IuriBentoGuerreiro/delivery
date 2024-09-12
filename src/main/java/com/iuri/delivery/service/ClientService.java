@@ -1,14 +1,12 @@
 package com.iuri.delivery.service;
 
-import com.iuri.delivery.dto.ClientDTO;
+import com.iuri.delivery.dto.client.ClientDTO;
 import com.iuri.delivery.model.Client;
 import com.iuri.delivery.repository.ClientRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
-
-import java.beans.Beans;
 
 @Service
 public class ClientService {

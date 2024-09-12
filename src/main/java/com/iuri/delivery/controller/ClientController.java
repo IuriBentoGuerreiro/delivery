@@ -1,6 +1,6 @@
 package com.iuri.delivery.controller;
 
-import com.iuri.delivery.dto.ClientDTO;
+import com.iuri.delivery.dto.client.ClientDTO;
 import com.iuri.delivery.model.Client;
 import com.iuri.delivery.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
