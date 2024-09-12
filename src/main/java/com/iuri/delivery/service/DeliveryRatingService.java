@@ -2,6 +2,7 @@ package com.iuri.delivery.service;
 
 import com.iuri.delivery.dto.deliveryRating.DeliveryRatingRequest;
 import com.iuri.delivery.dto.deliveryRating.DeliveryRatingResponse;
+import com.iuri.delivery.model.DeliveryPerson;
 import com.iuri.delivery.model.DeliveryRating;
 import com.iuri.delivery.repository.DeliveryRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class DeliveryRatingService {
         var deliveryRating = deliveryRatingRepository.save(DeliveryRating.builder()
                         .rating(request.getRating())
                         .comment(request.getComment())
+                        .deliveryPerson(deliveryPerson)
                         .sale(saleService.findById(request.getSaleId()))
                 .build());
 
