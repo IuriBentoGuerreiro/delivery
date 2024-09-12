@@ -12,18 +12,25 @@ public class DeliveryRatingService {
 
     private final DeliveryRatingRepository deliveryRatingRepository;
     private final SaleService saleService;
-    private final UserService userService;
+    private final DeliveryPersonService deliveryPersonService;
+    private final EmailService emailService;
 
     @Autowired
     public DeliveryRatingService(DeliveryRatingRepository deliveryRatingRepository,
                                  SaleService saleService,
-                                 UserService userService) {
+                                 DeliveryPersonService deliveryPersonService,
+                                 EmailService emailService) {
         this.deliveryRatingRepository = deliveryRatingRepository;
         this.saleService = saleService;
-        this.userService = userService;
+        this.deliveryPersonService = deliveryPersonService;
+        this.emailService = emailService;
     }
 
     public DeliveryRatingResponse save(DeliveryRatingRequest request){
+        var deliveryPerson = deliveryPersonService.findById(request.getDeliveryPersonId());
+
+        emailService.sendEmail(deliveryPerson.getEmail(), "VOCÊ ACABA DE RECEBER UMA AVALIAÇÃO, CONFIRA:", request.getComment());
+
         var deliveryRating = deliveryRatingRepository.save(DeliveryRating.builder()
                         .rating(request.getRating())
                         .comment(request.getComment())

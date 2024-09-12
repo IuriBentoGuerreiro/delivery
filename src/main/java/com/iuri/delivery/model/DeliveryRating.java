@@ -45,7 +45,7 @@ public class DeliveryRating {
         return DeliveryRating.builder()
                 .comment(deliveryRatingRequest.getComment())
                 .rating(deliveryRatingRequest.getRating())
-                .deliveryPerson(new DeliveryPerson(deliveryRatingRequest.getUserId()))
+                .deliveryPerson(new DeliveryPerson(deliveryRatingRequest.getDeliveryPersonId()))
                 .sale(new Sale(deliveryRatingRequest.getSaleId()))
                 .build();
     }

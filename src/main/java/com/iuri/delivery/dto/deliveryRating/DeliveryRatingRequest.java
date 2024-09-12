@@ -7,6 +7,6 @@ public class DeliveryRatingRequest {
 
     private String comment;
     private Integer rating;
-    private Integer userId;
+    private Integer DeliveryPersonId;
     private Integer saleId;
 }
