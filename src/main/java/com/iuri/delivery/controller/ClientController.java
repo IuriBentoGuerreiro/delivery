@@ -1,5 +1,6 @@
 package com.iuri.delivery.controller;
 
+import com.iuri.delivery.dto.ClientDTO;
 import com.iuri.delivery.model.Client;
 import com.iuri.delivery.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public Client save(@RequestBody Client client){
-        return clientService.save(client);
+    public Client save(@RequestBody ClientDTO clientDTO){
+        return clientService.save(clientDTO);
     }
 }
